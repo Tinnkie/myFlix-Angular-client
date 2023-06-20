@@ -126,6 +126,21 @@ isFavoriteMovie(movieId: string): boolean {
   return user.FavoriteMovies.indexOf(movieId) >= 0;
 }
 
+// Making the api call for the edit user endpoint
+editUser(updatedUser: any): Observable<any> {
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
+  const token = localStorage.getItem('token');
+  return this.http.put(apiUrl + 'users/' + user.username, updatedUser, {
+    headers: new HttpHeaders(
+      {
+        Authorization: 'Bearer ' + token,
+      })
+  }).pipe(
+    map(this.extractResponseData),
+    catchError(this.handleError)
+  );
+}
+
 // Non-typed response extraction
 private extractResponseData(res: any): any {
   const body = res;
