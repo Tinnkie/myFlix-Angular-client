@@ -43,7 +43,7 @@ getAllMovies(): Observable<any> {
 }
 
 // Making the api call for the get one movies endpoint
-getOneMovies(title: string): Observable<any> {
+getMovie(title: string): Observable<any> {
   const token = localStorage.getItem('token');
   return this.http.get(apiUrl + 'movies/' + title, {headers: new HttpHeaders(
     {
@@ -55,9 +55,21 @@ getOneMovies(title: string): Observable<any> {
 }
 
 // Making the api call for the get one director endpoint
-getOneDirectors(directorName: string): Observable<any> {
+getDirector(directorName: string): Observable<any> {
   const token = localStorage.getItem('token');
   return this.http.get(apiUrl + 'movies/directors' + directorName, {headers: new HttpHeaders(
+    {
+      Authorization: 'Bearer ' + token,
+    })}).pipe(
+    map(this.extractResponseData),
+    catchError(this.handleError)
+  );
+}
+
+// Making the api call for the get one genre endpoint
+getGenre(genreName: string): Observable<any> {
+  const token = localStorage.getItem('token');
+  return this.http.get(apiUrl + 'movies/genre' + genreName, {headers: new HttpHeaders(
     {
       Authorization: 'Bearer ' + token,
     })}).pipe(
