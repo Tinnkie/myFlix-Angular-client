@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
-const apiUrl = 'https://movieflix2023.herokuapp.com/movies';
+const apiUrl = 'https://movieflix2023.herokuapp.com/';
 @Injectable({
   providedIn: 'root'
 })
@@ -18,6 +18,14 @@ export class FetchApiDataService {
 public userRegistration(userDetails: any): Observable<any> {
   console.log(userDetails);
   return this.http.post(apiUrl + 'users', userDetails).pipe(
+  catchError(this.handleError)
+  );
+}
+
+// Making the api call for the user login endpoint
+public userLogin(userDetails: any): Observable<any> {
+  console.log(userDetails);
+  return this.http.post(apiUrl + 'login', userDetails).pipe(
   catchError(this.handleError)
   );
 }
