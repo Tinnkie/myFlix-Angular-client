@@ -41,6 +41,19 @@ getAllMovies(): Observable<any> {
     catchError(this.handleError)
   );
 }
+
+// Making the api call for the get one movies endpoint
+getOneMovies(title: string): Observable<any> {
+  const token = localStorage.getItem('token');
+  return this.http.get(apiUrl + 'movies/' + title, {headers: new HttpHeaders(
+    {
+      Authorization: 'Bearer ' + token,
+    })}).pipe(
+    map(this.extractResponseData),
+    catchError(this.handleError)
+  );
+}
+
 // Non-typed response extraction
 private extractResponseData(res: any): any {
   const body = res;
