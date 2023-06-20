@@ -102,6 +102,30 @@ getFavoriteMovies(): Observable<any> {
   );
 }
 
+// Making the api call for the add a movie to favourite movies endpoint
+// /users/:username/movies/:movieId
+addFavoriteMovie(movieId: string): Observable<any> {
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
+  const token = localStorage.getItem('token');
+  user.FavoriteMovies.push(movieId);
+  localStorage.setItem('user', JSON.stringify(user));
+  return this.http.post(apiUrl + 'users/' + user.username + '/movies/' + movieId, {}, {
+    headers: new HttpHeaders(
+      {
+        Authorization: 'Bearer ' + token,
+      }),
+    responseType: "text"
+  }).pipe(
+    map(this.extractResponseData),
+    catchError(this.handleError)
+  );
+}
+
+isFavoriteMovie(movieId: string): boolean {
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
+  return user.FavoriteMovies.indexOf(movieId) >= 0;
+}
+
 // Non-typed response extraction
 private extractResponseData(res: any): any {
   const body = res;
