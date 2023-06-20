@@ -78,6 +78,19 @@ getGenre(genreName: string): Observable<any> {
   );
 }
 
+// Making the api call for the get one user endpoint
+// !!!RECHECK IF THIS IS CORRECT!!!
+getOneUser(username: string): Observable<any> {
+  const token = localStorage.getItem('token');
+  return this.http.get(apiUrl + 'users' + username, {headers: new HttpHeaders(
+    {
+      Authorization: 'Bearer ' + token,
+    })}).pipe(
+    map(this.extractResponseData),
+    catchError(this.handleError)
+  );
+}
+
 // Non-typed response extraction
 private extractResponseData(res: any): any {
   const body = res;
