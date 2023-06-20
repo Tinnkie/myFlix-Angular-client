@@ -54,6 +54,18 @@ getOneMovies(title: string): Observable<any> {
   );
 }
 
+// Making the api call for the get one director endpoint
+getOneDirectors(directorName: string): Observable<any> {
+  const token = localStorage.getItem('token');
+  return this.http.get(apiUrl + 'movies/directors' + directorName, {headers: new HttpHeaders(
+    {
+      Authorization: 'Bearer ' + token,
+    })}).pipe(
+    map(this.extractResponseData),
+    catchError(this.handleError)
+  );
+}
+
 // Non-typed response extraction
 private extractResponseData(res: any): any {
   const body = res;
