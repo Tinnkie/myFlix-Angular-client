@@ -79,14 +79,25 @@ getGenre(genreName: string): Observable<any> {
 }
 
 // Making the api call for the get one user endpoint
-// !!!RECHECK IF THIS IS CORRECT!!!
-getOneUser(username: string): Observable<any> {
+// !!!RECHECK IF THIS IS CORRECT!!! /users/:username
+getUser(): Observable<any> {
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
+    return user;
+  }
+
+// Making the api call for the get favourite movies for a user endpoint
+// !!!RECHECK IF THIS IS CORRECT!!! /users/:username
+getFavoriteMovies(): Observable<any> {
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
   const token = localStorage.getItem('token');
-  return this.http.get(apiUrl + 'users' + username, {headers: new HttpHeaders(
-    {
-      Authorization: 'Bearer ' + token,
-    })}).pipe(
+  return this.http.get(apiUrl + 'users/' + user.username, {
+    headers: new HttpHeaders(
+      {
+        Authorization: 'Bearer ' + token,
+      })
+  }).pipe(
     map(this.extractResponseData),
+    map((data) => data.FavoriteMovies),
     catchError(this.handleError)
   );
 }
