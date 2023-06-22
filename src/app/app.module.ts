@@ -23,6 +23,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MovieInfoComponent } from './movie-info/movie-info.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { MatListModule } from '@angular/material/list';
+import { TopBarComponent } from './top-bar/top-bar.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
@@ -39,7 +41,8 @@ const appRoutes: Routes = [
     MovieCardComponent,
     WelcomePageComponent,
     MovieInfoComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    TopBarComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +58,8 @@ const appRoutes: Routes = [
     FormsModule,
     RouterModule.forRoot(appRoutes),
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

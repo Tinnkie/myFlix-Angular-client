@@ -1,3 +1,4 @@
+<app-top-bar></app-top-bar>
 <div style="padding:1rem">
     <h1>Profile</h1>
     <p>Username: {{user.Username}}</p>
@@ -26,7 +27,7 @@
         <input matInput [(ngModel)]="userData.Birthday" type="date" placeholder="Birthday" name="Birthday">
       </mat-form-field>
     </form>
-    <button mat-raised-button (click)="editUser()" color="primary">
+    <button mat-raised-button (click)="editUser()" color="primary" style="margin: 10px;">
       Update
     </button>
   
